@@ -26,6 +26,10 @@
 <body>
   <img id="randomImage" />
 
+  <audio id="bgMusic" autoplay loop>
+    <source src="./audios/Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster).mp3" type="audio/mpeg">
+  </audio>
+
   <script>
     const images = [
       "images/1.jpg",
@@ -47,6 +51,18 @@
 
     const randomIndex = Math.floor(Math.random() * images.length);
     document.getElementById("randomImage").src = images[randomIndex];
+
+    const audio = document.getElementById("bgMusic");
+    audio.volume = 1.0;
+
+    function startMusic() {
+      audio.play().catch(() => {});
+      document.removeEventListener("click", startMusic);
+      document.removeEventListener("keydown", startMusic);
+    }
+
+    document.addEventListener("click", startMusic);
+    document.addEventListener("keydown", startMusic);
   </script>
 </body>
 </html>
